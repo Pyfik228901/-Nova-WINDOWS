@@ -1,0 +1,9 @@
+let points = 75
+
+if points > 50 {
+    print("Уровень пройден!")
+}
+
+if points < 50 {
+    print("Ты проиграл...")
+}

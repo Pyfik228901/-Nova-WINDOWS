@@ -1,0 +1,58 @@
+// ==========================================
+// ИГРА: БИТВА С МОНСТРОМ (.nova)
+// ==========================================
+
+print("=== АРЕНА NOVASCRIPT: БИТВА НАЧИНАЕТСЯ! ===")
+print("Победи темного монстра, чтобы выжить.")
+print("")
+
+let player_hp = 100
+let monster_hp = 100
+
+while player_hp > 0 {
+    if monster_hp <= 0 {
+        print("")
+        print("🎉 ПОБЕДА! Ты одолел монстра и спас королевство Nova!")
+        let player_hp = 0
+    } else {
+        print("")
+        print("------------------------------------------")
+        print("Твое здоровье:")
+        print(player_hp)
+        print("Здоровье монстра:")
+        print(monster_hp)
+        print("------------------------------------------")
+
+        let action = input("Выбери действие: [1] Удар мечом  [2] Пить зелье: ")
+
+        if action == "1" {
+            let damage = random(12, 25)
+            let monster_hp = monster_hp - damage
+            print("⚔️ Ты успешно атакуешь и наносишь урон:")
+            print(damage)
+        } else {
+            let heal = random(10, 20)
+            let player_hp = player_hp + heal
+            print("🧪 Ты выпил зелье и восстановил здоровья:")
+            print(heal)
+        }
+
+        // Ответный ход монстра, если он еще жив
+        if monster_hp > 0 {
+            let m_damage = random(8, 22)
+            let player_hp = player_hp - m_damage
+            print("💥 Монстр яростно контратакует и наносит тебе урон:")
+            print(m_damage)
+        }
+    }
+}
+
+if player_hp <= 0 {
+    print("")
+    print("💀 ПОРАЖЕНИЕ! Монстр оказался сильнее...")
+}
+
+print("")
+print("==========================================")
+print("Спасибо за игру в NovaScript!")
+print("==========================================")

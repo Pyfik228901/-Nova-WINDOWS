@@ -1,0 +1,7 @@
+let name = input("Как тебя зовут? ")
+let lucky_number = random(1, 10)
+
+print("Привет от NovaScript!")
+print(name)
+print("Твое счастливое число:")
+print(lucky_number)
