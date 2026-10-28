@@ -1,0 +1,58 @@
+// ==========================================
+// ОФИЦИАЛЬНАЯ ПРЕЗЕНТАЦИЯ NOVASCRIPT (Core v2.0)
+// ==========================================
+
+print("Привет! Добро пожаловать в чистый консольный NovaScript.")
+print("")
+
+// 1. Переменные и типы данных
+let language_name = "NovaScript"
+let version = 2
+print("Текущая версия языка:")
+print(version)
+
+// 2. Ввод данных от пользователя
+print("")
+let user_name = input("Как тебя зовут? ")
+print("Приятно познакомиться, рапид-разработчик ")
+print(user_name)
+
+// 3. Условия (if / else)
+print("")
+let score = 90
+if score > 79 {
+    print("Экзамен сдан на отлично! Поздравляем.")
+} else {
+    print("Нужно повторить материал.")
+}
+
+// 4. Циклы (while)
+print("")
+print("Запуск обратного отсчета:")
+let count = 3
+while count > 0 {
+    print(count)
+    let count = count - 1
+}
+print("Старт!")
+
+// 5. Пользовательские функции и return
+print("")
+func calculateBonus(base) {
+    let bonus = base * 2
+    return bonus
+}
+
+print("Результат работы функции calculateBonus(25):")
+let final_bonus = calculateBonus(25)
+print(final_bonus)
+
+// 6. Генератор случайных чисел (random)
+print("")
+print("Случайный бонусный коэффициент (от 1 до 10):")
+let luck = random(1, 10)
+print(luck)
+
+print("")
+print("==========================================")
+print("Презентация завершена успешно!")
