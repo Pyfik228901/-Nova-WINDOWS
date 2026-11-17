@@ -1,0 +1,23 @@
+!GrassGreen!
+
+int calculate_power(int base, int exp) {
+    take result = 1;
+    take i = 0;
+    while (i < exp) {
+        result = result * base;
+        i = i + 1;
+    }
+    return result;
+}
+
+int main() {
+    take base = 2;
+    take exp = 8;
+    take res = calculate_power(base, exp);
+
+    gout << "=== GrassGreen main.grass execution ===" << endl;
+    gout << "Base: " << base << ", Exp: " << exp << endl;
+    gout << "Result: " << res << endl;
+
+    return 0;
+}

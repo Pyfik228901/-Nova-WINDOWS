@@ -1,0 +1,64 @@
+// ==========================================
+// [N&S] 2D Браузерная игра на HTML5 Canvas
+// ==========================================
+
+import "game2d"
+import "cli"
+
+print(cli.bold(cli.cyan("[Info] Инициализация 2D Canvas движка N&S...")))
+
+// Состояние игрока
+let player_x = 375
+let player_y = 275
+let player_speed = 260
+let player_size = 50
+
+// 1. Создание окна: запускает локальный HTTP-сервер и открывает браузер
+game2d.window(800, 600, "N&S 2D Canvas Engine")
+
+// 2. Игровой цикл: обновление физики и ввода
+game2d.on_update(func(dt) {
+    // Управление через WASD и стрелки
+    if game2d.key_down("KeyD") || game2d.key_down("ArrowRight") {
+        player_x = player_x + player_speed * dt
+    }
+    if game2d.key_down("KeyA") || game2d.key_down("ArrowLeft") {
+        player_x = player_x - player_speed * dt
+    }
+    if game2d.key_down("KeyW") || game2d.key_down("ArrowUp") {
+        player_y = player_y - player_speed * dt
+    }
+    if game2d.key_down("KeyS") || game2d.key_down("ArrowDown") {
+        player_y = player_y + player_speed * dt
+    }
+
+    // Ограничение границами экрана
+    if player_x < 0 { player_x = 0 }
+    if player_x > 750 { player_x = 750 }
+    if player_y < 0 { player_y = 0 }
+    if player_y > 550 { player_y = 550 }
+})
+
+// 3. Игровой цикл: отрисовка кадра на Canvas
+game2d.on_draw(func() {
+    // Очистка сцены тёмным фоном
+    game2d.clear("#11111b")
+
+    // Декоративная рамка
+    game2d.rect(20, 20, 760, 560, "#181825")
+
+    // Отрисовка игрока
+    game2d.rect(player_x, player_y, player_size, player_size, "#89b4fa")
+
+    // Отрисовка маркера мыши
+    let mx = game2d.mouse_x()
+    let my = game2d.mouse_y()
+    game2d.circle(mx, my, 12, "#a6e3a1")
+
+    // Текстовые подсказки
+    game2d.text("N&S Canvas Engine | WASD / Arrows to Move", 40, 55, 18, "#cdd6f4")
+    game2d.text("Mouse Position: [" + mx + ", " + my + "]", 40, 85, 14, "#a6adc8")
+})
+
+print(cli.green("[OK] Игровое окно готово. Запуск цикла 60 FPS..."))
+game2d.start()

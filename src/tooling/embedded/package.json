@@ -1,0 +1,60 @@
+{
+  "name": "ns-lang-support",
+  "displayName": "N&S (Nova Script) Language Support",
+  "description": "Официальная подсветка синтаксиса, автодополнение, сниппеты и иконка для языка N&S",
+  "version": "1.0.0",
+  "publisher": "m1oky",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "icon": "icon.png",
+  "activationEvents": [
+    "onLanguage:ns"
+  ],
+  "main": "./extension.js",
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "ns",
+        "aliases": [
+          "N&S",
+          "NovaScript",
+          "ns"
+        ],
+        "extensions": [
+          ".ns",
+          ".nova"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./logo.svg",
+          "dark": "./logo.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ns",
+        "scopeName": "source.ns",
+        "path": "./syntaxes/ns.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "ns",
+        "path": "./snippets/snippets.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "ns.runFile",
+        "title": "N&S: Запустить текущий скрипт [F5]",
+        "category": "N&S"
+      }
+    ]
+  }
+}

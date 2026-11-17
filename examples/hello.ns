@@ -1,0 +1,54 @@
+// ==========================================
+// [N&S] Базовый пример языка N&S
+// ==========================================
+
+import "cli"
+import "math"
+
+print(cli.bold(cli.cyan("========================================")))
+print(cli.bold(cli.cyan("  Добро пожаловать в N&S (Nova Script)  ")))
+print(cli.bold(cli.cyan("========================================")))
+print("")
+
+// 1. Переменные и типы данных
+let language_name = "N&S"
+let version = 1.0
+let is_compiled = true
+let tags = ["fast", "safe", "rust", "wasm"]
+let author = {
+    name: "m1oky",
+    role: "Core Developer"
+}
+
+print(cli.green("Язык: ") + language_name + " (v" + version + ")")
+print(cli.green("Автор: ") + author.name + " [" + author.role + "]")
+print("")
+
+// 2. Функции
+func calculate_hypotenuse(a, b) {
+    return math.sqrt(math.pow(a, 2) + math.pow(b, 2))
+}
+
+let c = calculate_hypotenuse(3, 4)
+print(cli.yellow("Гипотенуза треугольника 3-4-5: ") + c)
+
+// 3. Цикл for..in
+print("")
+print(cli.bold("Ключевые преимущества:"))
+for tag in tags {
+    print("  [x] " + cli.magenta(tag))
+}
+
+// 4. Математика и случайные числа
+let dice = math.random(1, 6)
+print("")
+print("Бросок кубика d6: " + cli.bold(cli.yellow(dice)))
+
+if dice >= 4 {
+    print(cli.green("[OK] Победный бросок! Успех!"))
+} else {
+    print(cli.red("[Info] Неудача, попробуйте еще раз."))
+}
+
+print("")
+print(cli.bold(cli.cyan("[OK] Скрипт успешно выполнен.")))

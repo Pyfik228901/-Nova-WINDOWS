@@ -1,0 +1,39 @@
+// ============================================================
+// [N&S] Интеграция языков N&S и GrassGreen (extern "grass" & import grass)
+// Документация GrassGreen: https://grassgreen.info
+// ============================================================
+
+import "cli"
+
+print(cli.bold(cli.cyan("==================================================")))
+print(cli.bold(cli.cyan("  N&S <-> GrassGreen FFI Interop Showcase         ")))
+print(cli.bold(cli.cyan("==================================================")))
+print("")
+
+// 1. Встраивание нативного кода GrassGreen через extern "grass"
+print(cli.yellow("[Info] 1. Выполнение встроенного блока extern 'grass':"))
+
+extern "grass" {
+    take user = "NS_Developer";
+    take ping_ms = 0.42;
+
+    gout << "  [GrassGreen Core] Native kernel output" << endl;
+    gout << "  User: " << user << ", Latency: " << ping_ms << " ms" << endl;
+}
+
+print("")
+print(cli.yellow("[Info] 2. Импорт внешнего скрипта GrassGreen (.grass):"))
+
+// 2. Импорт файла логики GrassGreen
+import grass "./backend_logic.grass" as backend
+
+if backend.available {
+    print(cli.green("[OK] Модуль backend_logic.grass успешно подключен."))
+    print("[Info] Запуск функции run():")
+    backend.run()
+} else {
+    print(cli.red("[Error] GrassGreen не установлен в системе."))
+}
+
+print("")
+print(cli.bold(cli.green("[OK] Интеграция завершена успешно.")))
