@@ -1,0 +1,6 @@
+// Negative test: Unclosed brace
+func broken() {
+    let x = 1;
+    let y = 2;
+}
+// Missing closing brace

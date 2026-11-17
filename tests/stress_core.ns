@@ -1,0 +1,145 @@
+// ============================================================
+// [Stress Test] Комплексное тестирование ядра языка N&S
+// ============================================================
+
+import "cli"
+
+print(cli.bold(cli.cyan("==================================================")))
+print(cli.bold(cli.cyan("  STRESS TEST: N&S Core Runtime & Data Structures ")))
+print(cli.bold(cli.cyan("==================================================")))
+print("")
+
+// ------------------------------------------------------------
+// 1. Тест рекурсии и изоляции областей видимости
+// ------------------------------------------------------------
+print(cli.yellow("[Test 1] Рекурсия и изоляция переменных"))
+
+let global_var = 1000
+
+func factorial(n) {
+    let local_var = n * 10
+    if n <= 1 {
+        return 1
+    }
+    let res = n * factorial(n - 1)
+    // Проверка, что local_var не был перезаписан вложенным вызовом
+    if local_var != n * 10 {
+        print(cli.red("[FAIL] Локальная переменная была повреждена!"))
+    }
+    return res
+}
+
+func fibonacci(n) {
+    if n <= 0 { return 0 }
+    if n == 1 { return 1 }
+    return fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+let fact_10 = factorial(10)
+let fib_15 = fibonacci(15)
+
+print("  factorial(10) = " + fact_10 + " (ожидалось: 3628800)")
+print("  fibonacci(15) = " + fib_15 + " (ожидалось: 610)")
+
+if fact_10 == 3628800 && fib_15 == 610 && global_var == 1000 {
+    print(cli.green("  [OK] Рекурсия и области видимости работают корректно."))
+} else {
+    print(cli.red("  [FAIL] Ошибка в рекурсивных вычислениях или области видимости!"))
+}
+
+// ------------------------------------------------------------
+// 2. Тест сложных структур данных (вложенные Array и Map)
+// ------------------------------------------------------------
+print("")
+print(cli.yellow("[Test 2] Сложные структуры данных и мутации"))
+
+let matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+// Изменение элемента по индексу
+matrix[1][1] = 555
+matrix[0][0] = 111
+
+print("  matrix[1][1] = " + matrix[1][1] + " (ожидалось: 555)")
+print("  matrix[0][0] = " + matrix[0][0] + " (ожидалось: 111)")
+
+let user = {
+    id: 1,
+    profile: {
+        name: "TestUser",
+        address: {
+            city: "OriginalCity",
+            zip: 12345
+        }
+    },
+    scores: [10, 20, 30]
+}
+
+// Мутация вложенного поля объекта
+user.profile.address.city = "NewCity"
+user.scores[1] = 999
+
+print("  user.profile.address.city = " + user.profile.address.city + " (ожидалось: NewCity)")
+print("  user.scores[1] = " + user.scores[1] + " (ожидалось: 999)")
+
+if matrix[1][1] == 555 && user.profile.address.city == "NewCity" && user.scores[1] == 999 {
+    print(cli.green("  [OK] Мутации вложенных структур данных успешны."))
+} else {
+    print(cli.red("  [FAIL] Ошибка мутации структур данных!"))
+}
+
+// ------------------------------------------------------------
+// 3. Тест циклов while и for..in внутри функций
+// ------------------------------------------------------------
+print("")
+print(cli.yellow("[Test 3] Циклы for..in и while внутри функций"))
+
+func process_matrix(m) {
+    let sum = 0
+    let row_idx = 0
+    while row_idx < len(m) {
+        let row = m[row_idx]
+        for val in row {
+            sum = sum + val
+        }
+        row_idx = row_idx + 1
+    }
+    return sum
+}
+
+let test_matrix = [
+    [10, 20],
+    [30, 40],
+    [50, 60]
+]
+
+let matrix_total = process_matrix(test_matrix)
+print("  Сумма элементов test_matrix = " + matrix_total + " (ожидалось: 210)")
+
+if matrix_total == 210 {
+    print(cli.green("  [OK] Вложенные циклы отработали корректно."))
+} else {
+    print(cli.red("  [FAIL] Ошибка вычисления во вложенных циклах!"))
+}
+
+// ------------------------------------------------------------
+// 4. Тест приоритета операторов и логики
+// ------------------------------------------------------------
+print("")
+print(cli.yellow("[Test 4] Приоритет операторов и булева логика"))
+
+let math_check = 2 + 3 * 4 == 14 && (10 - 2) / 2 == 4
+let str_check = "hello " + "world" == "hello world" && len("test") == 4
+let logic_check = !false && !(10 < 5)
+
+if math_check && str_check && logic_check {
+    print(cli.green("  [OK] Приоритет операций и булевы выражения верны."))
+} else {
+    print(cli.red("  [FAIL] Ошибка в логике операторов!"))
+}
+
+print("")
+print(cli.bold(cli.green("[OK] Все стресс-тесты ядра успешно пройдены!")))

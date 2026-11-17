@@ -1,0 +1,5 @@
+// Negative test: Undefined function
+func existing_func() {
+    return 42;
+}
+non_existent_function(1, 2, 3);

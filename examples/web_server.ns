@@ -1,0 +1,40 @@
+// ==========================================
+// [N&S] Веб-сервер и генерация HTML
+// ==========================================
+
+import "web"
+import "cli"
+
+print(cli.bold(cli.green("[Info] Инициализация N&S HTTP-сервера...")))
+
+// Главная страница с HTML-шаблоном
+web.get("/", func(req) {
+    let content = "<h1>N&S Web Backend</h1>" +
+                  "<p>Этот сервер написан на языке <b>N&S (Nova Script)</b> поверх легковесного сетевого движка Rust.</p>" +
+                  "<p>Метод запроса: <code>" + req.method + "</code></p>" +
+                  "<hr>" +
+                  "<p><a href='/api/status'>Перейти к JSON API (/api/status)</a></p>"
+
+    return web.html("N&S Web Application", content)
+})
+
+// JSON API эндпоинт
+web.get("/api/status", func(req) {
+    return {
+        server: "N&S Engine",
+        version: "1.0.0",
+        status: "online",
+        features: ["zero-overhead", "high-performance", "json-support"]
+    }
+})
+
+// POST-маршрут для приёма данных
+web.post("/api/echo", func(req) {
+    return {
+        received_body: req.body,
+        method: req.method
+    }
+})
+
+print(cli.cyan("[Info] Сервер сконфигурирован. Запуск на порту 8080..."))
+web.server(8080)

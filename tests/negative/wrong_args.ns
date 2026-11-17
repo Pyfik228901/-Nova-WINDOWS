@@ -1,0 +1,5 @@
+// Negative test: Wrong number of arguments
+func calculate(x, y, z) {
+    return x + y + z;
+}
+calculate(10, 20);

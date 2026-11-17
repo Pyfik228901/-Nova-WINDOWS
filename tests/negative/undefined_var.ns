@@ -1,0 +1,3 @@
+// Negative test: Undefined variable
+let a = 10;
+let b = a + undefined_variable_name;

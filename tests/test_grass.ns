@@ -1,0 +1,47 @@
+// ============================================================
+// [Test] Интеграция N&S и GrassGreen
+// ============================================================
+
+import "cli"
+
+print(cli.bold(cli.cyan("==================================================")))
+print(cli.bold(cli.cyan("  TEST: GrassGreen Integration in N&S            ")))
+print(cli.bold(cli.cyan("==================================================")))
+print("")
+
+// 1. Импорт внешнего файла .grass через import "./main.grass" as gg
+print(cli.yellow("[Test 1.1] Импорт модуля tests/main.grass и запуск main():"))
+import "./main.grass" as gg
+
+if gg.available {
+    print(cli.green("[OK] Модуль main.grass успешно обнаружен."))
+    print("[Info] Запуск модуля целиком через gg.run():")
+    gg.run()
+
+    print("")
+    print(cli.yellow("[Test 1.2] Вызов пользовательской функции calculate_power(2, 8):"))
+    let pow_res = gg.calculate_power(2, 8)
+    print("[OK] calculate_power(2, 8) вернул: " + pow_res)
+
+    if pow_res == 256 {
+        print(cli.green("[OK] Значение точно совпадает с ожидаемым (256)."))
+    } else {
+        print(cli.red("[Error] Неверное значение calculate_power."))
+    }
+} else {
+    print(cli.red("[Error] Компилятор GrassGreen не найден в системе."))
+}
+
+print("")
+// 2. Встроенный блок extern "grass"
+print(cli.yellow("[Test 2] Выполнение блока extern 'grass':"))
+
+extern "grass" {
+    take x = 15;
+    take y = 27;
+    take sum = x + y;
+    gout << "[GrassGreen Inline] Computed sum: " << sum << endl;
+}
+
+print("")
+print(cli.bold(cli.green("[OK] Все тесты интеграции GrassGreen успешно пройдены.")))

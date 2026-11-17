@@ -1,0 +1,111 @@
+{
+  "Function Definition": {
+    "prefix": "func",
+    "body": [
+      "func ${1:name}(${2:params}) {",
+      "\t${0:// body}",
+      "}"
+    ],
+    "description": "Объявление функции"
+  },
+  "Variable Declaration": {
+    "prefix": "let",
+    "body": [
+      "let ${1:name} = ${2:value}"
+    ],
+    "description": "Объявление переменной"
+  },
+  "If Statement": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition} {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Условный оператор"
+  },
+  "If-Else Statement": {
+    "prefix": "ifelse",
+    "body": [
+      "if ${1:condition} {",
+      "\t${2}",
+      "} else {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Условный оператор с веткой else"
+  },
+  "While Loop": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition} {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Цикл while"
+  },
+  "For In Loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:item} in ${2:list} {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Цикл for-in"
+  },
+  "GrassGreen Extern Block": {
+    "prefix": "extern_grass",
+    "body": [
+      "extern \"grass\" {",
+      "\t${0:// GrassGreen code}",
+      "}"
+    ],
+    "description": "Встраивание кода на языке GrassGreen"
+  },
+  "Web Server Template": {
+    "prefix": "web_server",
+    "body": [
+      "import \"web\"",
+      "",
+      "web.get(\"/\", func(req) {",
+      "\treturn web.html(\"N&S App\", \"<h1>Привет, N&S!</h1><p>Сервер работает быстро и надёжно.</p>\")",
+      "})",
+      "",
+      "web.get(\"/api/status\", func(req) {",
+      "\treturn { status: \"ok\", timestamp: 12345 }",
+      "})",
+      "",
+      "web.server(8080)"
+    ],
+    "description": "Шаблон HTTP-сервера N&S"
+  },
+  "Game2D Template": {
+    "prefix": "game2d_init",
+    "body": [
+      "import \"game2d\"",
+      "",
+      "let x = 100",
+      "let y = 100",
+      "let speed = 200",
+      "",
+      "game2d.window(800, 600, \"N&S 2D Game\")",
+      "",
+      "game2d.on_update(func(dt) {",
+      "\tif game2d.key_down(\"KeyD\") || game2d.key_down(\"ArrowRight\") { x = x + speed * dt }",
+      "\tif game2d.key_down(\"KeyA\") || game2d.key_down(\"ArrowLeft\") { x = x - speed * dt }",
+      "\tif game2d.key_down(\"KeyW\") || game2d.key_down(\"ArrowUp\") { y = y - speed * dt }",
+      "\tif game2d.key_down(\"KeyS\") || game2d.key_down(\"ArrowDown\") { y = y + speed * dt }",
+      "})",
+      "",
+      "game2d.on_draw(func() {",
+      "\tgame2d.clear(\"#181825\")",
+      "\tgame2d.rect(x, y, 40, 40, \"#89b4fa\")",
+      "\tgame2d.circle(game2d.mouse_x(), game2d.mouse_y(), 10, \"#a6e3a1\")",
+      "\tgame2d.text(\"Управление: WASD / Стрелки\", 20, 30, 18, \"#cdd6f4\")",
+      "})",
+      "",
+      "game2d.start()"
+    ],
+    "description": "Шаблон 2D игры на N&S"
+  }
+}
