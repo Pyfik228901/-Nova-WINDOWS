@@ -1,0 +1,3 @@
+// Negative test: Unclosed quote
+let message = "This string is never closed;
+let another = 123;

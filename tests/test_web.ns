@@ -1,0 +1,40 @@
+import "web" as web
+
+// 1. JSON parsing and stringifying test
+let test_obj = {
+    "name": "N&S Language",
+    "version": 1,
+    "features": ["rust", "safe", "fast"]
+};
+
+let json_str = web.json_stringify(test_obj);
+let parsed = web.json_parse(json_str);
+
+if (parsed.name == "N&S Language" && parsed.version == 1 && parsed.features[0] == "rust") {
+    print("[OK] JSON serialize and deserialize verified");
+} else {
+    print("[Error] JSON serialize/deserialize failed");
+}
+
+// 2. HTTP Routes registration
+web.get("/", func(req) {
+    return web.html("Test Page", web.tag("h1", {}, "Hello from N&S Web!"));
+});
+
+web.get("/api/data", func(req) {
+    return {
+        "status": "success",
+        "items": [1, 2, 3]
+    };
+});
+
+web.get("/stop", func(req) {
+    return {
+        "status": "stopped",
+        "shutdown": true
+    };
+});
+
+print("[Info] Starting Web Server on port 8088...");
+web.server(8088);
+print("[OK] Web Server stopped gracefully");

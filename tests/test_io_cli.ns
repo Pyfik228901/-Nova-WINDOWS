@@ -1,0 +1,52 @@
+// Test: I/O and CLI Standard Library Modules
+import "io" as io
+import "cli" as cli
+
+print("==================================================");
+print("  TEST: I/O and CLI Standard Library Modules      ");
+print("==================================================");
+
+// 1. File operations: Write, Exists, Read, Delete
+let test_file = "tests/test_temp_file.txt";
+let content = "Hello from N&S Rust Engine!";
+
+let write_res = io.write_file(test_file, content);
+if (!write_res) {
+    print("[Error] write_file failed");
+} else {
+    print("[OK] File successfully written: " + test_file);
+}
+
+if (!io.exists(test_file)) {
+    print("[Error] exists() returned false for created file");
+} else {
+    print("[OK] exists() confirmed file existence");
+}
+
+let read_content = io.read_file(test_file);
+if (read_content != content) {
+    print("[Error] Content mismatch! Read: " + read_content);
+} else {
+    print("[OK] read_file returned exact match: " + read_content);
+}
+
+let del_res = io.delete_file(test_file);
+if (!del_res) {
+    print("[Error] delete_file failed");
+} else {
+    print("[OK] delete_file successfully executed");
+}
+
+if (io.exists(test_file)) {
+    print("[Error] File still exists after delete_file!");
+} else {
+    print("[OK] exists() confirmed file is deleted");
+}
+
+// 2. CLI Arguments
+let args = cli.args();
+print("[Info] CLI Arguments received: " + args);
+
+// 3. CLI ANSI Colors
+let colored = cli.green("[OK] ANSI formatting verified");
+print(colored);

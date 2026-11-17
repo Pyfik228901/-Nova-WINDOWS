@@ -1,0 +1,14 @@
+!GrassGreen!
+
+int main() {
+    take module_name = "GrassGreen High-Speed Core";
+    take score = 1000;
+    take speed_up = 4.2;
+
+    gout << "=== GrassGreen Backend Logic Output ===" << endl;
+    gout << "Модуль: " << module_name << endl;
+    gout << "Вычисленные очки: " << score << endl;
+    gout << "Коэффициент ускорения: x" << speed_up << endl;
+
+    return 0;
+}
