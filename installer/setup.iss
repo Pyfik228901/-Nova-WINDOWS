@@ -46,6 +46,7 @@ Source: "..\target\debug\ns.exe"; DestDir: "{app}"; Flags: ignoreversion; Check:
 
 ; Иконка для ассоциации файлов и деинсталлятора
 Source: "..\assets\icon.ico"; DestDir: "{app}\assets"; Flags: ignoreversion
+Source: "..\assets\icon.png"; DestDir: "{app}\assets"; Flags: ignoreversion
 Source: "..\assets\logo.svg"; DestDir: "{app}\assets"; Flags: ignoreversion
 
 ; Примеры скриптов
