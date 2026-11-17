@@ -1,4 +1,8 @@
 fn main() {
+    println!("cargo:rerun-if-changed=assets/icon.ico");
+    println!("cargo:rerun-if-changed=assets/icon.png");
+    println!("cargo:rerun-if-changed=assets/logo.svg");
+
     #[cfg(windows)]
     {
         if std::path::Path::new("assets/icon.ico").exists() {
